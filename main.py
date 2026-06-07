@@ -38,10 +38,6 @@ class CVApp(QMainWindow):
         self.current_tab = 0
 
         self.tab_widget.currentChanged.connect(self.on_tab_changed)
-        self.slider_brightness.valueChanged.connect(self.spin_brightness.setValue)
-        self.spin_brightness.valueChanged.connect(self.slider_brightness.setValue)
-        self.slider_contrast.valueChanged.connect(lambda v: self.dspin_contrast.setValue(v / 100.0))
-        self.dspin_contrast.valueChanged.connect(lambda v: self.slider_contrast.setValue(int(v * 100)))
 
     def toggle_sidebar(self):
         if self.sidebar_visible:
@@ -55,11 +51,11 @@ class CVApp(QMainWindow):
         self.sidebar_visible = not self.sidebar_visible
 
     def reset_filters(self):
-        self.slider_brightness.setValue(0)
-        self.spin_brightness.setValue(0)
-        self.slider_contrast.setValue(100)
-        self.dspin_contrast.setValue(1.0)
-        print("Ползунки сброшены")
+        self.combo_transform_type.setCurrentIndex(0)
+        self.spin_c.setValue(1.0)
+        self.spin_gamma.setValue(1.0)
+
+        self.processed_frame = None
 
     def on_tab_changed(self, index):
         self.current_tab = index
@@ -80,13 +76,30 @@ class CVApp(QMainWindow):
         return frame.copy()
 
     def apply_scalar_transform(self, frame):
-        """Применение скалярных преобразований (яркость/контраст)"""
-        self.brightness = self.spin_brightness.value()
-        self.contrast = self.dspin_contrast.value()
+        transform_type = self.combo_transform_type.currentIndex()
+        c = self.spin_c.value()
+        gamma = self.spin_gamma.value()
 
-        alpha = self.contrast
-        beta = self.brightness
-        processed = cv2.convertScaleAbs(frame, alpha=alpha, beta=beta)
+        img_float = frame.astype(np.float32)
+
+        if transform_type == 1:
+            processed = 255.0 - img_float
+
+        elif transform_type == 2:
+            max_log = np.log1p(255.0)
+            processed = (c * np.log1p(img_float) / max_log) * 255.0
+
+        elif transform_type == 3:
+            normalized = img_float / 255.0
+            processed = c * np.power(normalized, gamma) * 255.0
+
+        elif transform_type == 4:
+            max_log = np.log1p(255.0)
+            processed = (c * np.log1p(255.0 - img_float) / max_log) * 255.0
+        else:
+            processed = img_float
+
+        processed = np.clip(processed, 0, 255).astype(np.uint8)
         return processed
 
     def display_image(self, cv_img, label_widget: QLabel):
@@ -110,6 +123,7 @@ class CVApp(QMainWindow):
             self.cap.release()
         cv2.destroyAllWindows()
         event.accept()
+
 
 
 if __name__ == '__main__':
