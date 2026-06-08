@@ -51,7 +51,7 @@
        <item>
         <widget class="QTabWidget" name="tab_widget">
          <property name="currentIndex">
-          <number>0</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="tab_scalar">
           <attribute name="title">
@@ -60,9 +60,9 @@
           <widget class="QWidget" name="verticalLayoutWidget_2">
            <property name="geometry">
             <rect>
-             <x>0</x>
+             <x>10</x>
              <y>10</y>
-             <width>261</width>
+             <width>251</width>
              <height>211</height>
             </rect>
            </property>
@@ -150,11 +150,234 @@
           <attribute name="title">
            <string>2. Статистика</string>
           </attribute>
+          <widget class="QWidget" name="verticalLayoutWidget">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>10</y>
+             <width>251</width>
+             <height>417</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <item>
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>Локальное улучшение</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>k0</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="spin_k0">
+              <property name="minimum">
+               <double>0.100000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>0.700000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.050000000000000</double>
+              </property>
+              <property name="value">
+               <double>0.400000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>k1</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="spin_k1">
+              <property name="decimals">
+               <number>3</number>
+              </property>
+              <property name="minimum">
+               <double>0.005000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>0.100000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.001000000000000</double>
+              </property>
+              <property name="value">
+               <double>0.020000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_7">
+              <property name="text">
+               <string>k2</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="spin_k2">
+              <property name="minimum">
+               <double>0.300000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>0.800000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.010000000000000</double>
+              </property>
+              <property name="value">
+               <double>0.400000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_8">
+              <property name="text">
+               <string>E</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="spin_E">
+              <property name="minimum">
+               <double>2.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>7.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.200000000000000</double>
+              </property>
+              <property name="value">
+               <double>4.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_9">
+              <property name="text">
+               <string>Размер окна</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spin_win">
+              <property name="minimum">
+               <number>3</number>
+              </property>
+              <property name="maximum">
+               <number>51</number>
+              </property>
+              <property name="singleStep">
+               <number>2</number>
+              </property>
+              <property name="displayIntegerBase">
+               <number>10</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_10">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_11">
+              <property name="text">
+               <string>Приведение гистограммы</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btn_load_template">
+              <property name="text">
+               <string>Загрузить изображение</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_template_name">
+              <property name="text">
+               <string>Файл не выбран</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
          </widget>
          <widget class="QWidget" name="tab_hist_filter">
           <attribute name="title">
            <string>3. Фильтры гист.</string>
           </attribute>
+          <widget class="QWidget" name="verticalLayoutWidget_3">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>10</y>
+             <width>251</width>
+             <height>201</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <widget class="QLabel" name="label_12">
+              <property name="text">
+               <string>Сглаживание гистограммы</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="combo_smooth_type">
+              <item>
+               <property name="text">
+                <string>Отключено</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>1. Скользящее среднее (Box Blur)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>2. Сглаживание по Гауссу</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_13">
+              <property name="text">
+               <string>Размер окна</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spin_hist_win">
+              <property name="minimum">
+               <number>3</number>
+              </property>
+              <property name="maximum">
+               <number>25</number>
+              </property>
+              <property name="value">
+               <number>5</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
          </widget>
          <widget class="QWidget" name="tab_binarization">
           <attribute name="title">
@@ -230,6 +453,13 @@
           <widget class="QPushButton" name="btn_toggle_sidebar">
            <property name="text">
             <string>Скрыть боковую панель</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="check_show_hist">
+           <property name="text">
+            <string>Показать гистограмму</string>
            </property>
           </widget>
          </item>
