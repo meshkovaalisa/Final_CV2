@@ -51,7 +51,7 @@
        <item>
         <widget class="QTabWidget" name="tab_widget">
          <property name="currentIndex">
-          <number>2</number>
+          <number>3</number>
          </property>
          <widget class="QWidget" name="tab_scalar">
           <attribute name="title">
@@ -383,6 +383,111 @@
           <attribute name="title">
            <string>4. Бинаризация</string>
           </attribute>
+          <widget class="QWidget" name="verticalLayoutWidget_4">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>10</y>
+             <width>251</width>
+             <height>261</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <item>
+             <widget class="QLabel" name="label_14">
+              <property name="text">
+               <string>Параметры бинаризации</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="combo_bin_method">
+              <item>
+               <property name="text">
+                <string>Отключено</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>1. Глобальный порог (Фиксированный)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>2. Автоматический метод Отсу (Otsu)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>3. Адаптивное среднее (Adaptive Mean)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>4. Адаптивный Гаусс (Adaptive Gaussian)</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_15">
+              <property name="text">
+               <string>Порог T:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spin_bin_threshold">
+              <property name="maximum">
+               <number>255</number>
+              </property>
+              <property name="value">
+               <number>127</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_16">
+              <property name="text">
+               <string>Размер окна</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spin_bin_win">
+              <property name="minimum">
+               <number>3</number>
+              </property>
+              <property name="maximum">
+               <number>25</number>
+              </property>
+              <property name="value">
+               <number>5</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_17">
+              <property name="text">
+               <string>Константа C:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spin_bin_c_val">
+              <property name="minimum">
+               <number>-20</number>
+              </property>
+              <property name="maximum">
+               <number>20</number>
+              </property>
+              <property name="value">
+               <number>2</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
          </widget>
          <widget class="QWidget" name="tab_corners">
           <attribute name="title">

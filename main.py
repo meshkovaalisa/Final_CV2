@@ -38,6 +38,8 @@ class CVApp(QMainWindow):
         self.tab_widget.currentChanged.connect(self.on_tab_changed)
         self.btn_load_template.clicked.connect(self.load_template_image)
         self.check_show_hist.clicked.connect(self.show_histogram)
+        self.combo_bin_method.currentIndexChanged.connect(self.toggle_binarization_widgets)
+        self.toggle_binarization_widgets()
 
     def toggle_sidebar(self):
         if self.sidebar_visible:
@@ -62,13 +64,17 @@ class CVApp(QMainWindow):
         self.spin_win.setValue(31)
         self.comboBox.setCurrentIndex(0)
         self.spinBox.setValue(5)
-        self.checkBox.setChecked(False)
 
         self.template_image = None
         self.label_template_name.setText("Файл не выбран")
+        self.combo_bin_method.setCurrentIndex(0)
+        self.spin_bin_threshold.setValue(127)
+        self.spin_bin_win.setValue(11)
+        self.spin_bin_c_val.setValue(2)
 
     def on_tab_changed(self, index):
         self.current_tab = index
+
 
     def update_frame(self):
         ret, frame = self.cap.read()
@@ -79,15 +85,24 @@ class CVApp(QMainWindow):
 
         self.display_image(frame, self.label_original)
         self.display_image(processed_frame, self.label_processed)
-        self.hist_window.update_histograms(frame, processed_frame,main_app=self)
+        self.hist_window.update_histograms(frame, processed_frame, main_app=self)
 
     def process_frame(self, frame):
-        if self.current_tab == 0:
-            return self.apply_scalar_transform(frame)
-        elif self.current_tab == 1:
-            return self.apply_histogram_transform(frame)
-        elif self.current_tab == 2:
+        current_widget = self.tab_widget.currentWidget()
+        if current_widget is None:
             return frame.copy()
+
+        tab_name = current_widget.objectName()
+
+        if tab_name == "tab_scalar":
+            return self.apply_scalar_transform(frame)
+
+        elif tab_name == "tab_histogram":
+            return self.apply_histogram_transform(frame)
+
+        elif tab_name == "tab_binarization":
+            return self.apply_binarization(frame)
+
         return frame.copy()
 
     def apply_scalar_transform(self, frame):
@@ -121,6 +136,54 @@ class CVApp(QMainWindow):
             self.template_image = cv2.imread(file_path, cv2.IMREAD_GRAYSCALE)
             if self.template_image is not None:
                 self.label_template_name.setText(f"Загружен: {file_path.split('/')[-1]}")
+
+    def toggle_binarization_widgets(self):
+        if not hasattr(self, 'combo_bin_method'):
+            return
+
+        method = self.combo_bin_method.currentIndex()
+
+        self.spin_bin_threshold.setEnabled(method == 1)
+
+        self.spin_bin_win.setEnabled(method in (3, 4))
+        self.spin_bin_c_val.setEnabled(method in (3, 4))
+
+    def apply_binarization(self, frame):
+        """Обработка видеопотока методами пороговой бинаризации из учебника"""
+        try:
+            method = self.combo_bin_method.currentIndex()
+            thresh_t = self.spin_bin_threshold.value()
+            win_size = self.spin_bin_win.value() | 1
+            c_val = self.spin_bin_c_val.value()
+        except AttributeError:
+            return frame.copy()
+
+        if method == 0:
+            return frame.copy()
+
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+        if method == 1:
+            _, binarized = cv2.threshold(gray, thresh_t, 255, cv2.THRESH_BINARY)
+
+        elif method == 2:
+            _, binarized = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+
+        elif method == 3:
+            binarized = cv2.adaptiveThreshold(
+                gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C,
+                cv2.THRESH_BINARY, win_size, c_val
+            )
+
+        elif method == 4:
+            binarized = cv2.adaptiveThreshold(
+                gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
+                cv2.THRESH_BINARY, win_size, c_val
+            )
+        else:
+            return frame.copy()
+
+        return cv2.cvtColor(binarized, cv2.COLOR_GRAY2BGR)
 
     def enhance_image(self, img, k0, k1, k2, E, win):
         img_f = img.astype(np.float32)
