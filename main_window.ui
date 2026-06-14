@@ -51,7 +51,7 @@
        <item>
         <widget class="QTabWidget" name="tab_widget">
          <property name="currentIndex">
-          <number>3</number>
+          <number>5</number>
          </property>
          <widget class="QWidget" name="tab_scalar">
           <attribute name="title">
@@ -369,7 +369,7 @@
                <number>3</number>
               </property>
               <property name="maximum">
-               <number>25</number>
+               <number>51</number>
               </property>
               <property name="value">
                <number>5</number>
@@ -489,30 +489,220 @@
            </layout>
           </widget>
          </widget>
-         <widget class="QWidget" name="tab_corners">
+         <widget class="QWidget" name="tab_detectors">
           <attribute name="title">
-           <string>5. Детекция углов</string>
+           <string>5. Детекция</string>
           </attribute>
-         </widget>
-         <widget class="QWidget" name="tab_contours">
-          <attribute name="title">
-           <string>6. Детекция контуров</string>
-          </attribute>
-         </widget>
-         <widget class="QWidget" name="tab_lines">
-          <attribute name="title">
-           <string>7. Детекция прямых</string>
-          </attribute>
-         </widget>
-         <widget class="QWidget" name="tab_faces">
-          <attribute name="title">
-           <string>8. Детекция лиц</string>
-          </attribute>
+          <widget class="QWidget" name="verticalLayoutWidget_5">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>10</y>
+             <width>251</width>
+             <height>381</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <item>
+             <widget class="QLabel" name="label_18">
+              <property name="text">
+               <string>Детектор углов</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="combo_corn_method">
+              <item>
+               <property name="text">
+                <string>Отключено</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>1. Harris</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>2. Shi-Tomas</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>3. FAST</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>4. Blob</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_21">
+              <property name="text">
+               <string>Детекция контуров</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="combo_cont_method">
+              <item>
+               <property name="text">
+                <string>Отключено</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>1. Canny</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>2. Sobel</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>3. findContours</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_22">
+              <property name="text">
+               <string>Детекция прямых</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="combo_line_method">
+              <item>
+               <property name="text">
+                <string>Отключено</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>1.  Хаф </string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>2. LSD </string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_23">
+              <property name="text">
+               <string>Детекция лиц</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="combo_face_method">
+              <item>
+               <property name="text">
+                <string>Отключено</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Каскады Хаара</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_19">
+              <property name="text">
+               <string>Порог / Качество:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spin_det_thresh">
+              <property name="maximum">
+               <number>100</number>
+              </property>
+              <property name="value">
+               <number>20</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_20">
+              <property name="text">
+               <string>Размер окна / Количество:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spin_det_param">
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>500</number>
+              </property>
+              <property name="value">
+               <number>50</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
          </widget>
          <widget class="QWidget" name="tab_motion">
           <attribute name="title">
-           <string>9. Отслеживание</string>
+           <string>6. Отслеживание</string>
           </attribute>
+          <widget class="QWidget" name="verticalLayoutWidget_6">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>10</y>
+             <width>251</width>
+             <height>121</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_6">
+            <item>
+             <widget class="QComboBox" name="combo_motion_type">
+              <item>
+               <property name="text">
+                <string>Отключено</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Отслеживание через ИИ (YOLOv8)</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spin_motion_thresh">
+              <property name="suffix">
+               <string>%</string>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>100</number>
+              </property>
+              <property name="value">
+               <number>25</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
          </widget>
         </widget>
        </item>
@@ -565,13 +755,6 @@
           <widget class="QPushButton" name="check_show_hist">
            <property name="text">
             <string>Показать гистограмму</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="btn_reset_filters">
-           <property name="text">
-            <string>Очистить фильтры</string>
            </property>
           </widget>
          </item>
